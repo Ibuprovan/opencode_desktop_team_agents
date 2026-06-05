@@ -1,0 +1,34 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "build",
+  "model": "xiaomi-token-plan-cn/mimo-v2.5-pro",
+  "agent": {
+    "pm": {
+      "description": "产品经理，负责需求分析、用户场景设计、编写 PRD",
+      "mode": "subagent",
+      "model": "xiaomi-token-plan-cn/mimo-v2.5-pro",
+      "permission": {
+        "edit": "allow",
+        "bash": "ask"
+      }
+    },
+    "backend-dev": {
+      "description": "后端/核心算法工程师，负责业务逻辑实现、核心算法与函数编写",
+      "mode": "subagent",
+      "model": "xiaomi-token-plan-cn/mimo-v2.5-pro",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "report": {
+      "description": "报告生成器，负责抽取 PRD 和代码结构，自动生成实验报告",
+      "mode": "subagent",
+      "model": "xiaomi-token-plan-cn/mimo-v2.5-pro",
+      "permission": {
+        "edit": "allow",
+        "bash": "ask"
+      }
+    }
+  }
+}
