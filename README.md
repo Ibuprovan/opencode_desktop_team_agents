@@ -1,124 +1,128 @@
 # Opencode Multi-Agent Virtual Engineering Team V2.2
 
-> DBA & QA Enhanced Edition
+> DBA & QA 增强版
 
-## Overview
+## 概述
 
-This repository contains the configuration for a multi-agent virtual engineering team built on [opencode](https://opencode.ai). It implements a closed-loop development workflow with 14 specialized agents covering management, architecture, database, engineering, quality assurance, security, and infrastructure layers.
+本仓库为 [opencode](https://opencode.ai) 提供一套多 Agent 虚拟工程团队配置，包含 14 个专业化 Agent，覆盖管理层、架构层、数据库层、研发层、质量红线层、安全层和基础设施层，实现从需求输入到交付报告的全闭环自动化开发。
 
-## Quick Start
+## 快速开始
 
-### Global Installation (Recommended)
+### 全局安装（推荐）
 
-Copy the configuration to your global opencode config directory:
+将配置复制到全局 opencode 配置目录：
 
 ```bash
 # Windows
 copy opencode.json %USERPROFILE%\.config\opencode\opencode.json
 xcopy /E /Y .opencode\agents\*.md %USERPROFILE%\.config\opencode\agents\
 
-# Linux/macOS
+# Linux / macOS
 cp opencode.json ~/.config/opencode/opencode.json
 cp -r .opencode/agents/*.md ~/.config/opencode/agents/
 ```
 
-### Project-level Installation
+### 项目级安装
 
-Place `opencode.json` and `.opencode/agents/` in your project root.
+将 `opencode.json` 和 `.opencode/agents/` 放置到项目根目录即可。项目级配置会覆盖全局配置。
 
-## Architecture
+## 团队架构
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Management & Architecture                 │
+│                    管理层 & 架构层                            │
 │         pmo ──> pm ──> architect ──> dba                    │
 └─────────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────────┐
-│                    Engineering (Parallel)                    │
+│                    研发层（并行）                              │
 │              backend-dev ∥ frontend-dev                      │
 └─────────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────────┐
-│                    Quality Gate                              │
+│                    质量红线层                                 │
 │         reviewer ──> qa-engineer                            │
 └─────────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────────┐
-│                    Infrastructure                            │
+│                    基础设施层                                 │
 │              memory ──> report                              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-## Agents
+## Agent 一览
 
-| Layer | Agent | Role | Output |
-|-------|-------|------|--------|
-| Management | `pmo` | Project Management Office | `docs/project-plan.md` |
-| Management | `pm` | Product Manager | `docs/prd.md` |
-| Architecture | `architect` | System Architect | `docs/architecture.md`, `docs/api-spec.md` |
-| Database | `dba` | Database Engineer | `docs/database.md` |
-| Engineering | `backend-dev` | Backend Engineer | `src/` |
-| Engineering | `frontend-dev` | Frontend Engineer | `frontend/` |
-| Quality | `reviewer` | Code Reviewer | `docs/review-report.md` |
-| Quality | `qa-engineer` | QA Engineer | `docs/test-plan.md`, `docs/test-report.md` |
-| Security | `security` | Compliance Security Officer | `docs/security-report.md` |
-| Security | `cyber` | Cybersecurity Specialist | `reports/vulnerability-assessment.md` |
-| Security | `research` | Research Analyst | `docs/research.md` |
-| Infrastructure | `memory` | Memory Manager | `project-memory.md` |
-| Infrastructure | `report` | Report Generator | `reports/` |
-| Infrastructure | `devops` | DevOps Engineer | `deployment/` |
+| 层级 | Agent | 职责 | 输出 |
+|------|-------|------|------|
+| 管理层 | `pmo` | 项目管理办公室：接收需求、评估复杂度、拆解任务、监控死循环 | `docs/project-plan.md` |
+| 管理层 | `pm` | 产品经理：需求分析、用户场景设计、编写 PRD | `docs/prd.md` |
+| 架构层 | `architect` | 系统架构师：技术选型、微服务划分、全局接口规范、技术仲裁 | `docs/architecture.md`, `docs/api-spec.md` |
+| 数据库层 | `dba` | 数据库工程师：物理建模、索引优化、安全与扩展规范 | `docs/database.md` |
+| 研发层 | `backend-dev` | 后端工程师：业务逻辑实现，严格遵循 DBA 表结构 | `src/` |
+| 研发层 | `frontend-dev` | 前端工程师：页面 UI、状态管理、接口对接 | `frontend/` |
+| 质量层 | `reviewer` | 代码审查员：架构合规性审查、代码规范检查 | `docs/review-report.md` |
+| 质量层 | `qa-engineer` | 测试工程师：断言矩阵设计、自动化测试、质量红线卡点 | `docs/test-plan.md`, `docs/test-report.md` |
+| 安全层 | `security` | 合规安全官：OWASP 风险评估、权限检查、阻断高危代码 | `docs/security-report.md` |
+| 安全层 | `cyber` | 网安特化智能体：静态代码审计、漏洞 PoC 验证、渗透测试分析 | `reports/vulnerability-assessment.md` |
+| 安全层 | `research` | 前沿调研员：CVE 漏洞调研、论文分析、技术攻关报告 | `docs/research.md` |
+| 基础设施层 | `memory` | 记忆管理器：维护项目长期记忆、动态切片注入上下文 | `project-memory.md` |
+| 基础设施层 | `report` | 报告生成器：实验报告、项目总结、学术格式文档整理 | `reports/` |
+| 基础设施层 | `devops` | 交付工程师：Dockerfile、CI/CD、部署配置 | `deployment/` |
 
-## Workflow
+## 工作流
+
+### 任务状态机
 
 ```
 [TODO] ──> [IN_PROGRESS] ──> [REVIEWS] ──> [TESTING] ──> [DONE]
                ▲                │            │
                │                ▼            ▼
                └─────────── [REJECTED] <─────┘
-                                │ (> 3 times)
+                                │ (往返 > 3 次)
                                 ▼
-                            [BLOCKED] (PMO arbitration)
+                            [BLOCKED] (PMO 仲裁)
 ```
 
-### Phase 1: Requirements & Architecture
+### 六阶段工作流
 
-`User` -> `pmo` -> `pm` (prd.md) -> `architect` (architecture.md, api-spec.md)
+**阶段 1：需求与架构基线**
 
-### Phase 2: Data Modeling (DBA Control)
+`User` -> `pmo` -> `pm` (`prd.md`) -> `architect` (`architecture.md`, `api-spec.md`)
 
-`architect` -> `dba` (database.md)
+**阶段 2：数据建模（DBA 严控）**
 
-### Phase 3: Parallel Development
+`architect` -> `dba` (`database.md`)
+
+**阶段 3：并行研发（分支隔离）**
 
 `dba` -> `backend-dev` ∥ `frontend-dev`
 
-### Phase 4: Code Review
+**阶段 4：代码与架构双重审查**
 
-`development` -> `reviewer` (review-report.md)
+开发完成 -> `reviewer` (`review-report.md`)
 
-### Phase 5: Quality Gate (QA Control)
+**阶段 5：动态测试硬门禁（QA 严控）**
 
-`TESTING` -> `qa-engineer` (test-plan.md, test-report.md)
+`TESTING` -> `qa-engineer` (`test-plan.md`, `test-report.md`)
 
-### Phase 6: Memory & Delivery
+**阶段 6：记忆固化与交付**
 
-`DONE` -> `memory` (project-memory.md) -> `report` (reports/)
+`DONE` -> `memory` (`project-memory.md`) -> `report` (`reports/`)
 
-## Rules
+## 三条铁律
 
-1. **DBA Priority**: Backend code containing `CREATE TABLE` or `ALTER TABLE` without备案 in `docs/database.md` will be rejected by reviewer and qa-engineer.
-2. **No Blind Assertions**: Test cases must include assertions for try-catch, error handling, and non-200 HTTP status codes.
-3. **File-based Communication**: Agents must write to files for inter-agent communication. No in-memory code passing.
+1. **DBA 优先权**：后端代码含 `CREATE TABLE` 或 `ALTER TABLE` 且未在 `docs/database.md` 备案，`reviewer` 和 `qa-engineer` 必须直接否决。
+2. **拒绝盲目断言**：测试用例必须覆盖 `try-catch`、错误处理、HTTP 非 200 状态码，否则视为无效。
+3. **文件唯一性**：Agent 间禁止内存传代码，必须写盘后由下游文件读取承接。
 
-## Directory Structure
+## 目录结构
 
 ```
 .
-├── opencode.json              # Agent configuration
-├── agents.md                  # V2.2 workflow documentation
+├── opencode.json                  # Agent 配置（权限、模型、描述）
+├── agents.md                      # V2.2 完整工作流文档
 ├── .opencode/
-│   └── agents/                # Agent prompt files
+│   └── agents/                    # Agent 指令文件
 │       ├── pmo.md
 │       ├── pm.md
 │       ├── architect.md
@@ -133,7 +137,7 @@ Place `opencode.json` and `.opencode/agents/` in your project root.
 │       ├── memory.md
 │       ├── report.md
 │       └── devops.md
-├── docs/                      # Documentation output
+├── docs/                          # 文档输出目录
 │   ├── prd.md
 │   ├── architecture.md
 │   ├── api-spec.md
@@ -142,19 +146,20 @@ Place `opencode.json` and `.opencode/agents/` in your project root.
 │   ├── review-report.md
 │   ├── test-plan.md
 │   └── test-report.md
-├── src/                       # Backend source code
-├── frontend/                  # Frontend source code
-├── tests/                     # Test scripts
-├── reports/                   # Generated reports
-└── deployment/                # Deployment configuration
+├── src/                           # 后端源码
+├── frontend/                      # 前端源码
+├── tests/                         # 测试脚本
+├── reports/                       # 生成的报告
+└── deployment/                    # 部署配置
 ```
 
 ## License
 
-MIT License - see [LICENSE](LICENSE)
+[MIT License](LICENSE)
 
-## Links
+## 相关链接
 
-- [opencode](https://opencode.ai)
-- [Documentation](https://opencode.ai/docs)
-- [Configuration Schema](https://opencode.ai/config.json)
+- [opencode 官网](https://opencode.ai)
+- [opencode 文档](https://opencode.ai/docs)
+- [配置 Schema](https://opencode.ai/config.json)
+- [GitHub 仓库](https://github.com/Ibuprovan/team_agents)
