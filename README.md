@@ -1,6 +1,4 @@
-# Opencode Multi-Agent Virtual Engineering Team V2.2
-
-> DBA & QA 增强版
+# Opencode Multi-Agent Virtual Engineering Team V2.3
 
 ## 概述
 
